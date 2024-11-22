@@ -45,6 +45,8 @@ print('마지막 항목 삭제 후:', pokemon)
 
 #4. 딕셔너리 메소드
 print('모든 키:', type(pokemon.keys()))
+#print('모든 값:', type(pokemon.values()))  <class 'dict_values'>
+#print('모든 키:', type(pokemon.items())) <class 'dict_items'>
 print('모든 키:', pokemon.keys())
 print('모든 값:', pokemon.values())
 
@@ -57,9 +59,10 @@ print('모든 쌍:', pokemon.items())
 #숙제 이해하기!
 print('요소1:', list(pokemon.items())[0][1])
 
-
-
-
+'''
+print('키 요소1:', pokemon.keys()[0]) 
+TypeError: 'dict_keys' object is not subscriptable
+'''
 
 
 

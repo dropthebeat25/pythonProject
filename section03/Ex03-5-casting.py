@@ -37,7 +37,15 @@ print(a)
 b = chr(65)
 print(b)
 
+print(int(3.14))
 
+'''
+주의사항: 
+부적절한 형변환 시도시 ValueError 발생
+    int('3.14')
+    int('ABC')
+문자열을 정수화 시킬 수 없지
+'''
 
 
 

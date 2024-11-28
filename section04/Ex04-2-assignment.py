@@ -25,6 +25,8 @@ print(f'교환 후- 체력: {hp}, 마나: {mp}')
 
 
 #임시변수 사용 교환
+hp, mp = 100, 50
+
 tmp = hp
 hp = mp
 mp = tmp

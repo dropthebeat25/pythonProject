@@ -37,11 +37,12 @@ with open('pokemon.txt', 'w') as file:
     print('name: 피카츄', file=file)
     print('type: 전기', file=file)
 
+'''
 file = open('pokemon.txt', 'w') as file:
 print('name: 피카츄', file=file)
 print('type: 전기', file=file)
 file.close()
-
+'''
 
 
 

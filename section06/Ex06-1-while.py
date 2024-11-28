@@ -14,19 +14,21 @@
 
 n = 10
 while n != 0: # True일때 수행 False 일 떄까지 반복
+    print(n)
+    n -= 1 # n = n - 1
 '''
 n = 10
 10 != 0 True
 10
 '''
+
+print(f'while문 끝나고 n의 값: {n} ')
+
+'''n = 10
+while True: # True일때 수행 False 일 떄까지 반복 , 무한 루프 돈다
     print(n)
     n -= 1 # n = n - 1
-
-
-
-
-
-
+'''
 
 
 

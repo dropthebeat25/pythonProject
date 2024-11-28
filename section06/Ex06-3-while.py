@@ -18,7 +18,6 @@ print(my_list)
 
 
 ''''
-
 my_list = []
 n = 1
 while n != 0:

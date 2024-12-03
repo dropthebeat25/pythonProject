@@ -23,10 +23,18 @@ result = plus(5, 7)
 print(result)
 
 
+'''
+def add(a, b):
+    print(a + b)  # 결과를 출력하지만 반환하지 않음
 
+result = add(3, 5) #8
 
+def add(a, b):
+    return a + b  # 결과를 반환
 
-
+result = add(3, 5)  # result에 8이 저장됨
+print(result)       # 출력: 8
+'''
 
 
 

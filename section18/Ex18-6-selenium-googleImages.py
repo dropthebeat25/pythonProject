@@ -14,6 +14,8 @@ pip install webdriver-manager
 
 '''
 
+import traceback
+
 import os
 import time
 import urllib.request
@@ -29,54 +31,76 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 
-# Chrome driver 자동 설치 및 서비스 생성
-service = Service(ChromeDriverManager().install())
+def download_images(keyword, num_images=10, output_dir='images'):
 
-# Chrome 드라이버 인스턴스 생성
-driver = webdriver.Chrome(service=service)
+    # Chrome driver 자동 설치 및 서비스 생성
+    service = Service(ChromeDriverManager().install())
 
-# 드라이버를 통해 Google 페이지 접속
-driver.get("https://images.google.com/")
+    # Chrome 드라이버 인스턴스 생성
+    driver = webdriver.Chrome(service=service)
 
-# 키워드
-keyword = 'cute cat'
+    # 드라이버를 통해 Google 페이지 접속
+    driver.get("https://images.google.com/")
 
-# 검색어 입력
-searh_bar = driver.find_element(By.NAME, 'q')
-searh_bar.send_keys(keyword)
-searh_bar.send_keys(Keys.RETURN)
 
-time.sleep(2)
+    # 검색어 입력
+    searh_bar = driver.find_element(By.NAME, 'q')
+    searh_bar.send_keys(keyword)
+    searh_bar.send_keys(Keys.RETURN) #
 
-thumnails = driver.find_elements(By.CSS_SELECTOR, '.H8Rx8c')
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-print(len(thumbnails))
+    time.sleep(2)
 
-thumnails[0].click()
+    thumbnails = driver.find_elements(By.CSS_SELECTOR, '.H8Rx8c')
 
-time.sleep(2)
 
-#sFlh5c FyHeAf iPVvYb
+    for idx, thumbnail in enumerate(thumbnails[:num_images]):
+     thumbnail.click()
 
-image = WebDriverWait(driver, 10).until(
+    time.sleep(2)
+
+    #sFlh5c FyHeAf iPVvYb
+
+    image = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located(
         (By.CSS_SELECTOR, '.sFlh5c.FyHeAf.iPVvYb')
+     )
     )
-)
 
-# 이미지 URL 가져오기
-image_url = image.get_attribute('src')
+    # 이미지 URL 가져오기
+    image_url = image.get_attribute('src')
 
-print(f'image_url: {image_url}')
-
-time.sleep(3000)
+    if image_url.startswith('data:'):
+        continue
 
 
+    ext = image_url.split('.')[-1].split('?')[0]
 
-# 드라이버 종료
-driver.quit()
+    print(f'image_url: {image_url}')
 
-#shift enter하면 여러 줄 쓰기가능 , ctrl 마우스 클릭해서 모듈을 자세히 볼 수 있다
+    headers = {'User-Agent': 'Mozilla/5.0'}
+
+    output_dir
+
+    request = urllib.request.Request(image_url, headers=headers)
+    with urllib.request.urlopen(request) as response:
+        with open(f'{output_dir}/{keyword}_{idx}.{ext}', 'wb') as out_file:
+            out_file.write(response.read())
+
+    # 드라이버 종료
+    driver.quit()
+
+# 실행코드
+keyword = '차은우'
+num_images = 15
+output_dir = 'images'
+
+# 이미지 다운로드 함수 호출
+download_images(keyword, num_images, ouput_dir)
+
+    #shift enter하면 여러 줄 쓰기가능 , ctrl 마우스 클릭해서 모듈을 자세히 볼 수 있다
 
 
 
